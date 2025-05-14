@@ -1,0 +1,21 @@
+@isTest
+private class AccountManagerTest {
+	@isTest
+    static void testGetAccount() {
+        Account acc = new Account(Name = 'TestAccount');
+        Insert acc;
+        
+        Contact con = new Contact(LastName = 'TestContact', AccountId = acc.Id);
+        Insert con;
+        
+        Id testId = acc.Id;
+        
+        RestRequest request = new restRequest();
+        request.requestUri = 'https://ap5.salesforce.com/services/apexrest/Accounts/'+ testId +'/contacts';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        
+        acc = AccountManager.getAccount();
+        System.assertNotEquals(acc, null);
+    }
+}

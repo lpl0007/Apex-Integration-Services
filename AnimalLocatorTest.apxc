@@ -1,0 +1,14 @@
+@isTest
+public class AnimalLocatorTest {
+    @isTest
+    static void testGetAnimalNameById() {
+        AnimalLocatorMock mock = new AnimalLocatorMock();
+        Test.setMock(HttpCalloutMock.class, mock);
+
+        String isValid = AnimalLocator.getAnimalNameById(1);
+        System.assertEquals('fluffy bunny', isValid);
+        
+        String isInvalid = AnimalLocator.getAnimalNameById(2);
+        System.assertEquals(null, isInvalid);
+    }
+}
